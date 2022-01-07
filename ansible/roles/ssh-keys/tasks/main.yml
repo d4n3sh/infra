@@ -1,0 +1,8 @@
+---
+# tasks file for ssh-keys
+- name: "SSH Authorized Keys"
+  authorized_key:
+    user: danesh
+    state: present
+    key : "{{ lookup('file','/home/danesh/.ssh/id_rsa.pub') }}"
+...
