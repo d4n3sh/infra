@@ -1,9 +1,11 @@
 ---
 - name: "Beast - Fedora 35"
   hosts: beast
+  become: True
 
   roles:
     - ssh-keys
+    - lazygit
 
       #  tasks:
       #    - name: Test
