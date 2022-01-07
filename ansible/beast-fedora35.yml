@@ -1,0 +1,14 @@
+---
+- name: "Beast - Fedora 35"
+  hosts: beast
+
+  roles:
+    - ssh-keys
+
+      #  tasks:
+      #    - name: Test
+      #      shell: "uptime"
+      #      register: output
+      #
+      #    - debug: var=output.stdout_lines
+...

@@ -1,4 +1,4 @@
 ---
-
+ansible_python_interpreter: python3
 package_list:
   - name: htop
