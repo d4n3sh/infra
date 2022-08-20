@@ -1,0 +1,53 @@
+---
+
+# This playbook sets up my work Mac
+- name: "Set up work Mac"
+  gather_facts: False
+  hosts: localhost
+  connection: local
+  tasks:
+
+  # Update brew, package definitions and upgrade all installed packages
+  - name: "Update brew package definitions"
+    community.general.homebrew:
+      update_homebrew: yes
+      upgrade_all: yes
+
+  # Install packages
+  - name: "Install packages"
+    community.general.homebrew_cask:
+      name: "{{ item }}"
+      state: present
+    with_items:
+      - balenaetcher
+      - bitwarden
+      - brave-browser
+      - cleanmymac
+      - clocker
+      - discord
+      - element
+      - firefox
+      - google-cloud-sdk
+      - google-drive
+      - iterm2
+      - kdenlive
+      - microsoft-edge
+      - notion
+      - obs
+      - obsidian
+      - postman
+      - raycast
+      - rectangle-pro
+      - remoteviewer
+      - royal-tsx
+      - screenflick
+      - slack
+      - spotify
+      - sublime-text
+      - tweetbot
+      - vagrant
+      - virtualbox
+      - visual-studio-code
+      - vivaldi
+      - vnc-viewer
+      - whatsapp
