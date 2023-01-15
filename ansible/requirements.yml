@@ -1,4 +1,8 @@
 ---
 collections:
   - name: community.general
+
+roles:
+  - name: geerlingguy.pip
+  - name: geerlingguy.docker
 ...
