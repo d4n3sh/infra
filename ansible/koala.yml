@@ -1,0 +1,19 @@
+---
+- name: "Koala Playbook"
+  hosts: koala
+  remote_user: danesh
+  become: true
+  vars:
+    - docker_install_compose: false
+    - docker_install_compose_plugin: true
+    - docker_users:
+        - danesh
+  tasks:
+    - name: Install Packages
+      ansible.builtin.package:
+        name:
+          - qemu-guest-agent
+        state: present
+  roles:
+    - geerlingguy.pip
+    - geerlingguy.docker
