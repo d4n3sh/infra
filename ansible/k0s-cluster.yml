@@ -1,0 +1,19 @@
+---
+# Enable ssh password authentication for all hosts in the "k0s_cluster" group.
+- name: Enable ssh password authentication
+  hosts: k0s_cluster, k0s_workstations
+  become: true
+  tasks:
+    - name: Enable ssh password authentication
+      ansible.builtin.lineinfile:
+        path: /etc/ssh/sshd_config
+        regexp: '^PasswordAuthentication'
+        line: 'PasswordAuthentication yes'
+        state: present
+      notify:
+        - Restart sshd
+  handlers:
+    - name: Restart sshd
+      ansible.builtin.service:
+        name: sshd
+        state: restarted

@@ -3,3 +3,12 @@
 
 [koala]
 192.168.99.251
+
+[k0s_cluster]
+k0sc1
+k0sw1
+k0sw2
+k0sw3
+
+[k0s_workstations]
+k0sws1
