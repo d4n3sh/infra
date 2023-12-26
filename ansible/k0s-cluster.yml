@@ -1,7 +1,7 @@
 ---
 # Enable ssh password authentication for all hosts in the "k0s_cluster" group.
 - name: Enable ssh password authentication
-  hosts: k0s_cluster, k0s_workstations
+  hosts: k0s_cluster
   become: true
   tasks:
     - name: Enable ssh password authentication
