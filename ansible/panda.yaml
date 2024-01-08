@@ -1,0 +1,17 @@
+---
+- name: Panda server setup
+  hosts: panda
+  become: true
+  tasks:
+    # Update Fedora Server
+    - name: Update Fedora Server
+      ansible.builtin.dnf:
+        name: '*'
+        state: latest
+        update_cache: true
+    # Install cockpit
+    - name: Install cockpit
+      ansible.builtin.include_role:
+        name: fedora.linux_system_roles.cockpit
+      vars:
+        cockpit_packages: default
