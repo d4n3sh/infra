@@ -22,6 +22,12 @@
         dest: /usr/local/bin/kubectl
         mode: '0755'
 
+    # Setup kubectl auto completion for bash on all hosts in the "k0s_workstations" group.
+    - name: Setup kubectl auto completion for bash
+      ansible.builtin.shell: "kubectl completion bash > /etc/bash_completion.d/kubectl"
+      args:
+        creates: /etc/bash_completion.d/kubectl
+
     # Enable ssh password authentication for all hosts in the "k0s_cluster" group.
     - name: Enable ssh password authentication
       ansible.builtin.lineinfile:
