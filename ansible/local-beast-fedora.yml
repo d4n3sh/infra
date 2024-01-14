@@ -7,6 +7,7 @@
   roles:
     - lazygit
     - ssh-keys
+    - sshd
 
   tasks:
     - name: Update DNF cache
@@ -17,6 +18,12 @@
       ansible.builtin.dnf:
         name: google-chrome-stable
         state: present
+    
+    - name: Install Spotify
+      community.general.flatpak:
+        name: com.spotify.Client
+        state: present
+
 
       #  tasks:
       #    - name: Test
