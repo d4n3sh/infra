@@ -20,3 +20,10 @@ k0sws1
 
 [k8s1_cluster]
 k8s1
+
+# k8s-c1 k0s cluster
+[k8s_c1_control_nodes]
+k8s-c1-c1.lab
+
+[k8s_c1_worker_nodes]
+k8s-c1-w1.lab
