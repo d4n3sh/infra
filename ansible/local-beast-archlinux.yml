@@ -1,0 +1,10 @@
+---
+- name: "Beast - Fedora"
+  hosts: localhost
+  connection: local
+  become: True
+
+  roles:
+    - aur_yay
+
+...
