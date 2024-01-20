@@ -7,4 +7,24 @@
   roles:
     - aur_helper
 
+  tasks:
+    - name: Install AUR packages
+      become: true
+      become_user: aur_builder
+      kewlfft.aur.aur:
+        use: yay
+        name:
+          - google-chrome
+          - spotify
+          - virtualbox-ext-oracle
+
+    - name: Install Arch packages
+      become: true
+      community.general.pacman:
+        name:
+          - nerd-fonts
+          - virtualbox-host-modules-arch
+          - virtualbox-guest-iso
+          - virtualbox
+        state: present
 ...
