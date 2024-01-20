@@ -17,6 +17,7 @@
           - google-chrome
           - spotify
           - virtualbox-ext-oracle
+          - visual-studio-code-bin 
 
     - name: Install Arch packages
       become: true
@@ -26,5 +27,16 @@
           - virtualbox-host-modules-arch
           - virtualbox-guest-iso
           - virtualbox
+          - bluez
+          - bluez-utils
         state: present
+      notify: Start and enable bluetooth
+
+  handlers:
+    - name: Start and enable bluetooth
+      become: true
+      ansible.builtin.systemd:
+        name: bluetooth
+        state: started
+        enabled: yes
 ...
