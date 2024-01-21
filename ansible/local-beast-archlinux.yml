@@ -6,6 +6,7 @@
 
   roles:
     - aur_helper
+    - zsh
 
   tasks:
     - name: Install AUR packages
@@ -29,6 +30,10 @@
           - virtualbox
           - bluez
           - bluez-utils
+          - zsh
+          - less
+          - tldr
+          - man-db
         state: present
       notify: Start and enable bluetooth
 
