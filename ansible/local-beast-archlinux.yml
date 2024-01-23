@@ -19,6 +19,7 @@
           - spotify
           - virtualbox-ext-oracle
           - visual-studio-code-bin 
+          - google-cloud-cli
 
     - name: Install Arch packages
       become: true
@@ -34,6 +35,14 @@
           - less
           - tldr
           - man-db
+          - minikube
+          - fzf
+          - the_silver_searcher
+          - ripgrep
+          - fd
+          - kubectl
+          - hugo
+          - python-crcmod
         state: present
       notify: Start and enable bluetooth
 
