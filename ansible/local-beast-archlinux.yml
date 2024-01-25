@@ -20,12 +20,14 @@
           - virtualbox-ext-oracle
           - visual-studio-code-bin 
           - google-cloud-cli
+          - google-cloud-cli-gke-gcloud-auth-plugin
 
     - name: Install Arch packages
       become: true
       community.general.pacman:
         name:
           - nerd-fonts
+          - k9s
           - virtualbox-host-modules-arch
           - virtualbox-guest-iso
           - virtualbox
@@ -43,6 +45,8 @@
           - kubectl
           - hugo
           - python-crcmod
+          - usbutils
+          - aspell
         state: present
       notify: Start and enable bluetooth
 
