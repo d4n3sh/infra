@@ -21,7 +21,7 @@
           - visual-studio-code-bin 
           - google-cloud-cli
           - google-cloud-cli-gke-gcloud-auth-plugin
-
+          - k0sctl
     - name: Install Arch packages
       become: true
       community.general.pacman:
