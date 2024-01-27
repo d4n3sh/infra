@@ -47,6 +47,9 @@
           - python-crcmod
           - usbutils
           - aspell
+          - docker
+          - docker-compose
+          - vagrant
         state: present
       notify: Start and enable bluetooth
 
