@@ -9,7 +9,7 @@ spec:
       user: danesh
       port: 22
       keyPath: null
-    role: controller
+    role: controller+worker
   - ssh:
       address: k8s-c1-w1.lab
       user: danesh
