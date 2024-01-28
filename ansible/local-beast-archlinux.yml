@@ -50,6 +50,8 @@
           - docker
           - docker-compose
           - vagrant
+          - borg
+          - ncdu
         state: present
       notify: Start and enable bluetooth
 
