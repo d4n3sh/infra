@@ -53,6 +53,7 @@
           - borg
           - ncdu
           - kustomize
+          - argocd
         state: present
       notify: Start and enable bluetooth
 
