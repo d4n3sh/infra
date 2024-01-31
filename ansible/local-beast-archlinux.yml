@@ -52,6 +52,7 @@
           - vagrant
           - borg
           - ncdu
+          - kustomize
         state: present
       notify: Start and enable bluetooth
 
