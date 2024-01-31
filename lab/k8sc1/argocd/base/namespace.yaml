@@ -1,0 +1,8 @@
+# Manifest to create namespace for argocd "argocd"
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: argocd
+  labels:
+    app.kubernetes.io/name: argocd
+    app.kubernetes.io/part-of: argocd
