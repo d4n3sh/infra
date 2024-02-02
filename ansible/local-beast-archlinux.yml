@@ -26,6 +26,7 @@
       become: true
       community.general.pacman:
         name:
+          - inetutils
           - nerd-fonts
           - k9s
           - virtualbox-host-modules-arch
