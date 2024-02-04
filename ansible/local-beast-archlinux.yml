@@ -55,6 +55,7 @@
           - ncdu
           - kustomize
           - argocd
+          - helm
         state: present
       notify: Start and enable bluetooth
 
