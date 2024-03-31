@@ -19,6 +19,7 @@
           - virtualbox-host-modules-arch
           - virtualbox-guest-iso
           - virtualbox
+          - bluedevil
           - bluez
           - bluez-utils
           - zsh
@@ -45,6 +46,15 @@
           - helm
           - tmux
           - lazygit
+          - kitty
+          - partitionmanager
+          - dosfstools
+          - exfat-utils
+          - ntfs-3g
+          - firefox
+          - kde-multimedia-meta
+          - kde-graphics-meta
+          - kde-utilities-meta
         state: present
       notify: Start and enable bluetooth
 
