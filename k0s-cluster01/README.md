@@ -17,3 +17,7 @@
 `qm destroy 200`
 
 `qm destroy 201`
+
+`qm start 200`
+
+`qm start 201`
