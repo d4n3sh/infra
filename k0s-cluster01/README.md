@@ -40,3 +40,4 @@ NAME      STATUS   ROLES           AGE     VERSION       LABELS
 k03-c01   Ready    control-plane   3m42s   v1.30.1+k0s   beta.kubernetes.io/arch=amd64,beta.kubernetes.io/os=linux,kubernetes.io/arch=amd64,kubernetes.io/hostname=k03-c01,kubernetes.io/os=linux,node-role.kubernetes.io/control-plane=true,node.k0sproject.io/role=control-plane
 k03-w01   Ready    <none>          3m36s   v1.30.1+k0s   beta.kubernetes.io/arch=amd64,beta.kubernetes.io/os=linux,kubernetes.io/arch=amd64,kubernetes.io/hostname=k03-w01,kubernetes.io/os=linux
 ```
+`k9s --kubeconfig k0s-cluster01.kubeconfig`
