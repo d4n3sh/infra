@@ -21,3 +21,12 @@
 `qm start 200`
 
 `qm start 201`
+
+`ansible-playbook -i ansible/inventory ansible/playbook.yaml`
+
+`k0sctl init --k0s --cluster-name k0s-cluster01 --controller-count 1 --user danesh k0sc01 k0sw01  > k0sctl.yaml`
+
+`k0sctl apply --config k0s/k0sctl.yaml --dry-run`
+
+`k0sctl apply --config k0s/k0sctl.yaml`
+
