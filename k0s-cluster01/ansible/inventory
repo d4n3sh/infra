@@ -1,0 +1,5 @@
+[control-plane]
+k0sc01
+
+[worker-nodes]
+k0sw01

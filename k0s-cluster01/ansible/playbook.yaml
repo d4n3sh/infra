@@ -1,0 +1,20 @@
+---
+# Task to install qemu-guest-agent on ubuntu and start the service
+- name: Install qemu-guest-agent on ubuntu
+  hosts: all
+  become: true
+  tasks:
+    - name: Update apt cache
+      apt:
+        update_cache: yes
+    - name: Update system packages
+      apt:
+        upgrade: dist
+    - name: Install qemu-guest-agent
+      apt:
+        name: qemu-guest-agent
+        state: present
+    - name: Start qemu-guest-agent service
+      service:
+        name: qemu-guest-agent
+        state: started
