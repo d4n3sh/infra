@@ -41,3 +41,5 @@ k03-c01   Ready    control-plane   3m42s   v1.30.1+k0s   beta.kubernetes.io/arch
 k03-w01   Ready    <none>          3m36s   v1.30.1+k0s   beta.kubernetes.io/arch=amd64,beta.kubernetes.io/os=linux,kubernetes.io/arch=amd64,kubernetes.io/hostname=k03-w01,kubernetes.io/os=linux
 ```
 `k9s --kubeconfig k0s-cluster01.kubeconfig`
+
+![k9s](images/k9s.png)
