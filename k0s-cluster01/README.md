@@ -44,4 +44,25 @@ k03-w01   Ready    <none>          3m36s   v1.30.1+k0s   beta.kubernetes.io/arch
 
 ![k9s](images/k9s.png)
 
+## MetalLB
 `kubectl --kubeconfig k0s-cluster01.kubeconfig apply -k kustomize/`
+
+## Longhorn CSI
+`helm repo add longhorn https://charts.longhorn.io`
+
+`helm repo update`
+
+`helm install longhorn longhorn/longhorn --kubeconfig k0s-cluster01.kubeconfig --namespace longhorn-system --create-namespace --version 1.6.2`
+
+![alt text](images/k9s-longhorn.png)
+
+## Nginx Ingress Controller
+`helm repo add ingress-nginx https://kubernetes.github.io/ingress-nginx`
+
+`helm repo update`
+
+`helm install ingress-nginx ingress-nginx/ingress-nginx --kubeconfig k0s-cluster01.kubeconfig --namespace ingress-nginx-system --create-namespace`
+
+`kubectl --kubeconfig k0s-cluster01.kubeconfig apply -f longhornIngress.yaml`
+
+![alt text](images/k9s-nginx-ingress.png)
