@@ -43,3 +43,5 @@ k03-w01   Ready    <none>          3m36s   v1.30.1+k0s   beta.kubernetes.io/arch
 `k9s --kubeconfig k0s-cluster01.kubeconfig`
 
 ![k9s](images/k9s.png)
+
+`kubectl --kubeconfig k0s-cluster01.kubeconfig apply -k kustomize/`
