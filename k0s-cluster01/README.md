@@ -1,6 +1,6 @@
-`qm clone 9000 200 --name k03-c01 --full`
+`qm clone 9000 200 --name k03c01 --full`
 
-`qm clone 9000 201 --name k03-w01 --full`
+`qm clone 9000 201 --name k03w01 --full`
 
 `qm set 200 --ipconfig0 ip=192.168.100.110/24,gw=192.168.100.1 --nameserver 192.168.100.1 --searchdomain home.d4n3sh.com`
 
