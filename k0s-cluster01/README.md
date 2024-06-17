@@ -45,7 +45,9 @@ k03-w01   Ready    <none>          3m36s   v1.30.1+k0s   beta.kubernetes.io/arch
 ![k9s](images/k9s.png)
 
 ## MetalLB
-`kubectl --kubeconfig k0s-cluster01.kubeconfig apply -k kustomize/`
+`helm --kubeconfig ~/.secrets/k0s-cluster01.kubeconfig install metallb metallb/metallb --namespace metallb-system --create-namespace`
+
+`kubectl --kubeconfig ~/.secrets/k0s-cluster01.kubeconfig -n metallb-system apply -f metallb/ipAddressPools.ym`
 
 ## Longhorn CSI
 `helm repo add longhorn https://charts.longhorn.io`
