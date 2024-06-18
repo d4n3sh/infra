@@ -3,13 +3,16 @@ kind: Ingress
 metadata:
   name: longhorn-ingress
   namespace: longhorn-system
+  annotations:
+    kubernetes.io/ingress.class: nginx
+    nginx.ingress.kubernetes.io/rewrite-target: /$2
 spec:
   ingressClassName: nginx
   rules:
   - http:
       paths:
-      - pathType: Prefix
-        path: "/"
+      - pathType: ImplementationSpecific
+        path: "/longhorn(/|$)(.*)" # This is the path that will be used to access the Longhorn UI
         backend:
           service:
             name: longhorn-frontend
