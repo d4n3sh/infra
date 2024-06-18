@@ -65,6 +65,6 @@ k03-w01   Ready    <none>          3m36s   v1.30.1+k0s   beta.kubernetes.io/arch
 
 `helm install ingress-nginx ingress-nginx/ingress-nginx --kubeconfig k0s-cluster01.kubeconfig --namespace ingress-nginx-system --create-namespace`
 
-`kubectl --kubeconfig k0s-cluster01.kubeconfig apply -f longhornIngress.yaml`
+`kubectl --kubeconfig k0s-cluster01.kubeconfig apply -f longhorn/longhornIngress.yaml`
 
 ![alt text](images/k9s-nginx-ingress.png)
