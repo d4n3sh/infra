@@ -24,6 +24,9 @@
 
 `ansible-playbook -i ansible/inventory ansible/playbook.yaml`
 
+Install the k0sctl cli tool on macOS  
+`brew install k0sproject/tap/k0sctl`
+
 `k0sctl init --k0s --cluster-name k0s-cluster01 --controller-count 1 --user danesh k0sc01 k0sw01  > k0sctl.yaml`
 
 `k0sctl apply --config k0s/k0sctl.yaml --dry-run`
