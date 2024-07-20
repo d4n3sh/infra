@@ -58,24 +58,24 @@ spec:
     targetPort: 8989
   selector:
     app: sonarr
-  type: LoadBalancer
-# ---
-# apiVersion: networking.k8s.io/v1
-# kind: Ingress
-# metadata:
-#   name: sonarr-ingress
-#   annotations:
-#     kubernetes.io/ingress.class: nginx
-#     nginx.ingress.kubernetes.io/rewrite-target: /$2
-# spec:
-#   ingressClassName: nginx
-#   rules:
-#   - http:
-#       paths:
-#       - pathType: ImplementationSpecific
-#         path: "/sonarr(/|$)(.*)" # This is the path that will be used to access the Sonarr UI
-#         backend:
-#           service:
-#             name: sonarr
-#             port:
-#               number: 80
+  type: ClusterIP
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: sonarr-ingress
+  annotations:
+    kubernetes.io/ingress.class: nginx
+spec:
+  ingressClassName: nginx
+  rules:
+  - host: sonarr.k8s.home.d4n3sh.com
+    http:
+      paths:
+      - path: "/"
+        pathType: Prefix
+        backend:
+          service:
+            name: sonarr
+            port:
+              number: 80
