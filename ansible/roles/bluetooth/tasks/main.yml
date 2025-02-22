@@ -1,0 +1,10 @@
+---
+- name: Enable bluetooth support
+  become: true
+  community.general.pacman:
+    name:
+      - bluez
+      - bluez-utils
+    state: present
+  notify:
+    - Start bluetooth.service
