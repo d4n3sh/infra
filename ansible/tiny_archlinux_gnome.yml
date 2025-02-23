@@ -65,6 +65,7 @@
           - terraform
           - terragrunt
           - tflint
+          - talosctl # CLI tool to manage Talos Linux
         state: present
 
     - name: Install AUR packages
