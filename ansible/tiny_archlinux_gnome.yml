@@ -1,0 +1,83 @@
+---
+- name: "System Configuration for tiny"
+  hosts: localhost
+  connection: local
+
+  roles:
+    - aur_helper
+    - zsh
+    - font_comic_code
+    - ohmyzsh
+    - vim_copilot
+
+  tasks:
+    - name: Install Arch packages
+      become: true
+      community.general.pacman:
+        name:
+          - less
+          - htop
+          - btop
+          - nvtop
+          - inetutils
+          - nerd-fonts
+          - noto-fonts
+          - noto-fonts-cjk
+          - noto-fonts-emoji
+          - ttf-ubuntu-font-family
+          - dog # dig alternative
+          - bind # prodvides dig
+          #- k9s
+          #- virtualbox-host-modules-arch
+          #- virtualbox-guest-iso
+          #- virtualbox
+          - zsh
+          #- less
+          - tldr
+          - man-db
+          - minikube
+          - fzf
+          #- fd
+          #- kubectl
+          #- hugo
+          #- python-crcmod
+          #- usbutils
+          #- aspell
+          #- docker
+          #- docker-compose
+          #- vagrant
+          #- borg
+          - ncdu
+          #- kustomize
+          #- argocd
+          #- helm
+          - z
+          - starship
+          - tmux
+          - lazygit
+          - dosfstools
+          - exfat-utils
+          - ntfs-3g
+          - shortwave
+          - vivaldi
+          - discord
+          - firefox
+          - terraform
+          - terragrunt
+          - tflint
+        state: present
+
+    - name: Install AUR packages
+      become: true
+      become_user: aur_builder
+      kewlfft.aur.aur:
+        use: yay
+        name:
+          - google-chrome
+          - spotify
+          #- virtualbox-ext-oracle
+          - visual-studio-code-bin 
+          - google-cloud-cli
+          - google-cloud-cli-gke-gcloud-auth-plugin
+          #- k0sctl
+...
