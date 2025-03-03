@@ -27,7 +27,7 @@
           - ttf-ubuntu-font-family
           - dog # dig alternative
           - bind # prodvides dig
-          #- k9s
+          - k9s # Kubernetes TUI tool
           #- virtualbox-host-modules-arch
           #- virtualbox-guest-iso
           #- virtualbox
@@ -81,4 +81,5 @@
           - google-cloud-cli
           - google-cloud-cli-gke-gcloud-auth-plugin
           #- k0sctl
+          - oh-my-posh
 ...
