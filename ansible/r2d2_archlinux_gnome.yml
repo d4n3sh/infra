@@ -12,6 +12,7 @@
     - power_profiles_daemon
     - sshd
     - ssh-agent
+    - bluetooth_archlinux
 
   tasks:
     - name: Install Arch packages
