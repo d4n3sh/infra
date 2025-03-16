@@ -27,6 +27,9 @@
           - ttf-ubuntu-font-family
           - dog # dig alternative
           - bind # prodvides dig
+          - jq
+          - yq
+          - ghostty
           #- k9s
           #- virtualbox-host-modules-arch
           #- virtualbox-guest-iso
