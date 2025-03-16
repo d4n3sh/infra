@@ -51,7 +51,7 @@
           #- kustomize
           #- argocd
           #- helm
-          - z
+          - zoxide
           - starship
           - tmux
           - lazygit
