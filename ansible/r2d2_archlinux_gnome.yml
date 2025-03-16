@@ -8,6 +8,7 @@
     - font_comic_code
     - ohmyzsh
     - vim_copilot
+    - power_profiles_daemon
 
   tasks:
     - name: Install Arch packages
