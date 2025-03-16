@@ -1,11 +1,9 @@
 ---
 - name: Install Oh My ZSH
-  become : true
-  become_user: aur_builder
-  kewlfft.aur.aur:
-    use: yay
-    name:
-      - oh-my-zsh-git
+  ansible.builtin.git:
+    repo: https://github.com/ohmyzsh/ohmyzsh.git
+    dest: "{{ ansible_env.HOME }}/.oh-my-zsh"
+    depth: 1
 
 - name: Install Oh My ZSH fzf-tab plugin
   ansible.builtin.git:
