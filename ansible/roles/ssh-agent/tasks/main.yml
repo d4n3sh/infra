@@ -1,0 +1,10 @@
+---
+- name: Enable and start user ssh-agent daemon
+  become: true
+  become_user: "{{ ansible_user_id }}"
+  ansible.builtin.systemd:
+    name: ssh-agent
+    enabled: true
+    scope: user
+    state: started
+...
