@@ -16,6 +16,7 @@
       community.general.pacman:
         name:
           - less
+          - jq
           - htop
           - btop
           - nvtop
