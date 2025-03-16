@@ -1,6 +1,7 @@
 ---
 - name: "System Configuration for r2d2"
   hosts: local
+  vars:
 
   roles:
     - aur_helper
@@ -9,6 +10,7 @@
     - ohmyzsh
     - vim_copilot
     - power_profiles_daemon
+    - sshd
 
   tasks:
     - name: Install Arch packages
