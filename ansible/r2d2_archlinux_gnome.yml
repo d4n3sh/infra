@@ -11,6 +11,7 @@
     - vim_copilot
     - power_profiles_daemon
     - sshd
+    - ssh-agent
 
   tasks:
     - name: Install Arch packages
