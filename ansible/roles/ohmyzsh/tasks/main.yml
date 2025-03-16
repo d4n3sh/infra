@@ -36,4 +36,11 @@
     depth: 1
   become: true
   become_user: "{{ ansible_user_id }}"
+
+- name: Create .zshrc file
+  ansible.builtin.template:
+    src: zshrc.j2
+    dest: "{{ ansible_env.HOME }}/.zshrc"
+  become: true
+  become_user: "{{ ansible_user_id }}"
 ...
