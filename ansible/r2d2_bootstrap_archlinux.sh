@@ -4,4 +4,4 @@ sudo pacman -S ansible
 
 ansible-galaxy install -r requirements.yml
 
-ansible-playbook local-r2d2-archlinux.yml
+ansible-playbook r2d2_archlinux_gnome.yml -K
