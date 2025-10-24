@@ -1,0 +1,57 @@
+---
+- name: K0s workstation
+  hosts: k0s_workstations
+  become: true
+  tasks:
+    # Update the apt cache and packages on all hosts in the "k0s_workstations" group.
+    - name: Update apt cache and packages
+      ansible.builtin.apt:
+        update_cache: true
+        upgrade: true
+
+    # Install the required packages on all hosts in the "k0s_workstations" group.
+    - name: Install required packages
+      ansible.builtin.apt:
+        name:
+          - doas
+
+    # Install kubectl on all hosts in the "k0s_workstations" group.
+    - name: Install kubectl
+      ansible.builtin.get_url:
+        url: "https://storage.googleapis.com/kubernetes-release/release/v1.29.0/bin/linux/amd64/kubectl"
+        dest: /usr/local/bin/kubectl
+        mode: '0755'
+
+    # Setup kubectl auto completion for bash on all hosts in the "k0s_workstations" group.
+    - name: Setup kubectl auto completion for bash
+      ansible.builtin.shell: "kubectl completion bash > /etc/bash_completion.d/kubectl"
+      args:
+        creates: /etc/bash_completion.d/kubectl
+
+    # Enable ssh password authentication for all hosts in the "k0s_cluster" group.
+    - name: Enable ssh password authentication
+      ansible.builtin.lineinfile:
+        path: /etc/ssh/sshd_config
+        regexp: '^PasswordAuthentication'
+        line: 'PasswordAuthentication yes'
+        state: present
+      notify:
+        - Restart sshd
+  handlers:
+    - name: Restart sshd
+      ansible.builtin.service:
+        name: sshd
+        state: restarted
+
+    # Install the k0sctl binary on all hosts in the "k0s_workstations" group.
+    - name: Install k0sctl
+      ansible.builtin.get_url:
+        url: "https://github.com/k0sproject/k0sctl/releases/download/v0.16.0/k0sctl-linux-x64"
+        dest: /usr/local/bin/k0sctl
+        mode: '0755'
+
+    # Set up the k0sctl auto completion for bash on all hosts in the "k0s_workstations" group.
+    - name: Set up k0sctl auto completion for bash
+      ansible.builtin.shell: "k0sctl completion > /etc/bash_completion.d/k0sctl"
+      args:
+        creates: /etc/bash_completion.d/k0sctl

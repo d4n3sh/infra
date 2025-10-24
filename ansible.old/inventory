@@ -1,0 +1,29 @@
+panda ansible_host=192.168.101.100
+
+[localhost]
+127.0.0.1
+
+[beast]
+192.168.1.50
+
+[koala]
+192.168.99.251
+
+[k0s_cluster]
+k0sc1
+k0sw1
+k0sw2
+k0sw3
+
+[k0s_workstations]
+k0sws1
+
+[k8s1_cluster]
+k8s1
+
+# k8s-c1 k0s cluster
+[k8s_c1_control_nodes]
+k8s-c1-c1.lab
+
+[k8s_c1_worker_nodes]
+k8s-c1-w1.lab
