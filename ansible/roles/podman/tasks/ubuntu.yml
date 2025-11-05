@@ -1,0 +1,38 @@
+---
+- name: Update apt cache
+  apt:
+    update_cache: yes
+    cache_valid_time: 3600
+  become: yes
+
+- name: Install Podman
+  apt:
+    name: podman
+    state: present
+  become: yes
+
+- name: Enable and start Podman socket (if using rootless)
+  systemd:
+    name: "podman.socket"
+    enabled: "{{ podman_enable_socket }}"
+    state: "{{ 'started' if podman_enable_socket else omit }}"
+    scope: user
+  when: podman_enable_socket | default(false)
+  become: no
+
+- name: Create Podman configuration directory
+  file:
+    path: "{{ podman_config_dir }}"
+    state: directory
+    mode: '0755'
+  become: yes
+  when: podman_config_dir is defined
+
+- name: Configure Podman registries
+  template:
+    src: registries.conf.j2
+    dest: /etc/containers/registries.conf
+    mode: '0644'
+  become: yes
+  when: podman_registries is defined
+  notify: restart podman

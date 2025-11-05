@@ -1,0 +1,6 @@
+---
+# RedHat family specific package names
+required_packages_os_specific:
+  - ca-certificates
+  - curl
+  - gnupg2

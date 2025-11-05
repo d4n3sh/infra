@@ -1,0 +1,7 @@
+---
+- name: restart podman
+  systemd:
+    name: podman
+    state: restarted
+  become: yes
+  ignore_errors: yes

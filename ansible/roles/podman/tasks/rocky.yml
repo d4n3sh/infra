@@ -1,0 +1,27 @@
+---
+# Rocky Linux Podman installation tasks
+# TODO: Implement Rocky Linux specific installation steps
+
+- name: Install Podman on Rocky Linux
+  dnf:
+    name: podman
+    state: present
+  become: yes
+
+- name: Enable and start Podman socket (if using rootless)
+  systemd:
+    name: "podman.socket"
+    enabled: "{{ podman_enable_socket }}"
+    state: "{{ 'started' if podman_enable_socket else omit }}"
+    scope: user
+  when: podman_enable_socket | default(false)
+  become: no
+
+- name: Configure Podman registries
+  template:
+    src: registries.conf.j2
+    dest: /etc/containers/registries.conf
+    mode: '0644'
+  become: yes
+  when: podman_registries is defined
+  notify: restart podman

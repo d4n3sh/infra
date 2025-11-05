@@ -1,0 +1,3 @@
+---
+# Default timezone for the homelab environment
+system_timezone: America/Chicago

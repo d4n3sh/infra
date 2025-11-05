@@ -1,0 +1,6 @@
+---
+- name: Install required packages on RedHat/Rocky
+  ansible.builtin.dnf:
+    name: "{{ required_packages_final }}"
+    state: "{{ required_packages_state }}"
+  become: true

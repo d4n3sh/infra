@@ -1,0 +1,23 @@
+---
+# Default variables for Podman role
+
+# Enable Podman socket for rootless containers
+podman_enable_socket: false
+
+# Podman configuration directory
+# podman_config_dir: /etc/containers
+
+# Configure container registries
+# Uncomment and customize as needed
+# podman_registries:
+#   unqualified_search_registries:
+#     - docker.io
+#     - quay.io
+#   registries:
+#     - location: docker.io
+#       insecure: false
+#     - location: quay.io
+#       insecure: false
+
+# Podman package state
+podman_package_state: present
