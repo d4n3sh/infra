@@ -24,3 +24,9 @@
   become: true
   roles:
     - ntp-server
+
+- name: Configure NTP clients
+  hosts: all:!ntp
+  become: true
+  roles:
+    - ntp-client
