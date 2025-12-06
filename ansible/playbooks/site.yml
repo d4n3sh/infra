@@ -13,6 +13,12 @@
   roles:
     - required-packages
 
+- name: Update system packages
+  hosts: all
+  become: true
+  roles:
+    - system-upgrade
+
 - name: Install and configure Podman
   hosts: podman
   become: true
@@ -30,3 +36,16 @@
   become: true
   roles:
     - ntp-client
+
+- name: Configure Nginx on Podman
+  hosts: container02
+  become: true
+  roles:
+    - nginx_podman
+
+# - name: Configure DNS server
+#   hosts: dns
+#   become: true
+#   roles:
+#    - dns-server
+
