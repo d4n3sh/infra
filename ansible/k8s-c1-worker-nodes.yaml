@@ -1,0 +1,18 @@
+# Enable ssh password authentication
+- name: Enable ssh password authentication
+  hosts: k8s_c1_worker_nodes
+  become: true
+  tasks:
+    - name: Enable ssh password authentication
+      ansible.builtin.lineinfile:
+        path: /etc/ssh/sshd_config
+        regexp: '^PasswordAuthentication'
+        line: 'PasswordAuthentication yes'
+        state: present
+      notify:
+        - Restart sshd
+  handlers:
+    - name: Restart sshd
+      ansible.builtin.service:
+        name: sshd
+        state: restarted

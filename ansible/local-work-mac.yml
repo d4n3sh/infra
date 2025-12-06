@@ -1,0 +1,76 @@
+---
+
+# This playbook sets up my work Mac
+- name: "Set up work Mac"
+  gather_facts: False
+  hosts: localhost
+  connection: local
+  tasks:
+
+  # Ask yes/no question.
+  - name: "Pause to get input"
+    ansible.builtin.pause:
+      prompt: "Are you sure? yes/no?"
+      echo: yes
+    register: var_yesno
+
+  # Update brew, package definitions and upgrade all installed packages
+  - name: "Update brew package definitions"
+    community.general.homebrew:
+      update_homebrew: yes
+      upgrade_all: yes
+    when: var_yesno.user_input | bool
+
+  # Install Formulae
+  - name: "Install formulae"
+    community.general.homebrew:
+      name: "{{ item }}"
+      state: present
+    with_items:
+      - bitwarden-cli
+      - fzf
+      - jq
+      - lazygit
+      - tmux
+      - wget
+    when: var_yesno.user_input | bool
+
+  # Install Casks
+  - name: "Install casks"
+    community.general.homebrew_cask:
+      name: "{{ item }}"
+      state: present
+    with_items:
+      - balenaetcher
+      - bitwarden
+      - brave-browser
+      - cleanmymac
+      - clocker
+      - discord
+      - element
+      - firefox
+      - google-cloud-sdk
+      - google-drive
+      - iterm2
+      - kdenlive
+      - microsoft-edge
+      - notion
+      - obs
+      - obsidian
+      - postman
+      - raycast
+      - rectangle-pro
+      - remoteviewer
+      - royal-tsx
+      - screenflick
+      - slack
+      - spotify
+      - sublime-text
+      - tweetbot
+      - vagrant
+      - virtualbox
+      - visual-studio-code
+      - vivaldi
+      - vnc-viewer
+      - whatsapp
+    when: var_yesno.user_input | bool

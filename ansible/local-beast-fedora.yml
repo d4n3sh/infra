@@ -1,0 +1,34 @@
+---
+- name: "Beast - Fedora"
+  hosts: localhost
+  connection: local
+  become: True
+
+  roles:
+    - lazygit
+    - ssh-keys
+    - sshd
+
+  tasks:
+    - name: Update DNF cache
+      ansible.builtin.dnf:
+        update_cache: true
+
+    - name: Install Google Chrome
+      ansible.builtin.dnf:
+        name: google-chrome-stable
+        state: present
+    
+    - name: Install Spotify
+      community.general.flatpak:
+        name: com.spotify.Client
+        state: present
+
+
+      #  tasks:
+      #    - name: Test
+      #      shell: "uptime"
+      #      register: output
+      #
+      #    - debug: var=output.stdout_lines
+...
