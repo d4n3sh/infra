@@ -1,0 +1,51 @@
+---
+# Main site playbook for infrastructure management
+
+- name: Configure system timezone
+  hosts: all
+  become: true
+  roles:
+    - timezone
+
+- name: Install required packages
+  hosts: all
+  become: true
+  roles:
+    - required-packages
+
+- name: Update system packages
+  hosts: all
+  become: true
+  roles:
+    - system-upgrade
+
+- name: Install and configure Podman
+  hosts: podman
+  become: true
+  roles:
+    - podman
+
+- name: Install and configure NTP server
+  hosts: ntp
+  become: true
+  roles:
+    - ntp-server
+
+- name: Configure NTP clients
+  hosts: all:!ntp
+  become: true
+  roles:
+    - ntp-client
+
+- name: Configure Nginx on Podman
+  hosts: container02
+  become: true
+  roles:
+    - nginx_podman
+
+# - name: Configure DNS server
+#   hosts: dns
+#   become: true
+#   roles:
+#    - dns-server
+

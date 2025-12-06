@@ -1,0 +1,37 @@
+---
+- name: Find OS-specific variables file
+  set_fact:
+    os_vars_file: "{{ lookup('first_found', params, errors='ignore') }}"
+  vars:
+    params:
+      files:
+        - "{{ ansible_distribution }}-{{ ansible_distribution_major_version }}.yml"
+        - "{{ ansible_distribution }}.yml"
+        - "{{ ansible_os_family }}.yml"
+      paths:
+        - "vars"
+
+- name: Include OS-specific variables
+  include_vars: "{{ os_vars_file }}"
+  when: os_vars_file | length > 0
+
+- name: Install Podman on Ubuntu/Debian
+  include_tasks: ubuntu.yml
+  when: ansible_os_family == "Debian"
+
+- name: Install Podman on Rocky Linux
+  include_tasks: rocky.yml
+  when: ansible_distribution == "Rocky"
+
+- name: Install Podman on CentOS
+  include_tasks: centos.yml
+  when: ansible_distribution == "CentOS"
+
+- name: Verify Podman installation
+  command: podman --version
+  register: podman_version
+  changed_when: false
+
+- name: Display Podman version
+  debug:
+    msg: "Podman {{ podman_version.stdout }} is installed"

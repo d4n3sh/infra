@@ -1,0 +1,21 @@
+---
+galaxy_info:
+  author: danny
+  description: NTP server configuration using chrony
+  license: MIT
+  min_ansible_version: '2.9'
+  platforms:
+    - name: EL
+      versions:
+        - 8
+        - 9
+    - name: Ubuntu
+      versions:
+        - focal
+        - jammy
+  galaxy_tags:
+    - ntp
+    - chrony
+    - time
+
+dependencies: []

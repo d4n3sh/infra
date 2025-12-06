@@ -1,0 +1,25 @@
+---
+# Primary NTP server(s) to sync with
+ntp_client_servers:
+  - 192.168.100.3
+
+# Fallback NTP servers (commented out by default to rely on local NTP server)
+ntp_client_fallback_servers: []
+# Example fallback servers:
+#   - ntp.ubuntu.com
+#   - time.cloudflare.com
+
+# Maximum root distance in seconds
+ntp_client_root_distance_max_sec: 5
+
+# Minimum poll interval in seconds
+ntp_client_poll_interval_min_sec: 32
+
+# Maximum poll interval in seconds
+ntp_client_poll_interval_max_sec: 2048
+
+# Connection retry interval in seconds
+ntp_client_connection_retry_sec: 30
+
+# Save interval in seconds
+ntp_client_save_interval_sec: 60

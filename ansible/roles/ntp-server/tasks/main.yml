@@ -1,0 +1,37 @@
+---
+- name: Install chrony NTP service
+  ansible.builtin.package:
+    name: chrony
+    state: present
+
+- name: Configure chrony
+  ansible.builtin.template:
+    src: chrony.conf.j2
+    dest: /etc/chrony/chrony.conf
+    owner: root
+    group: root
+    mode: '0644'
+  notify: Restart chrony
+
+- name: Enable and start chrony service
+  ansible.builtin.service:
+    name: chronyd
+    state: started
+    enabled: true
+
+- name: Allow NTP through firewall (firewalld)
+  ansible.posix.firewalld:
+    service: ntp
+    permanent: true
+    state: enabled
+    immediate: true
+  when: ansible_facts['os_family'] == "RedHat"
+  ignore_errors: true
+
+- name: Allow NTP through firewall (ufw)
+  community.general.ufw:
+    rule: allow
+    port: '123'
+    proto: udp
+  when: ansible_facts['os_family'] == "Debian"
+  ignore_errors: true

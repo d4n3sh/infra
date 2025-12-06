@@ -1,0 +1,12 @@
+---
+- name: Update apt cache
+  ansible.builtin.apt:
+    update_cache: true
+    cache_valid_time: 3600
+  become: true
+
+- name: Install required packages on Debian/Ubuntu
+  ansible.builtin.apt:
+    name: "{{ required_packages_final }}"
+    state: "{{ required_packages_state }}"
+  become: true

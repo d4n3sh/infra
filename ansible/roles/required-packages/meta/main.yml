@@ -1,0 +1,29 @@
+---
+galaxy_info:
+  role_name: required_packages
+  namespace: homelab
+  author: danny
+  description: Install required system packages including qemu-guest-agent
+  company: Homelab
+  license: MIT
+  min_ansible_version: "2.9"
+  platforms:
+    - name: Ubuntu
+      versions:
+        - focal
+        - jammy
+    - name: Debian
+      versions:
+        - bullseye
+        - bookworm
+    - name: EL
+      versions:
+        - "8"
+        - "9"
+  galaxy_tags:
+    - system
+    - required
+    - packages
+    - qemu
+
+dependencies: []

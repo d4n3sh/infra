@@ -1,0 +1,15 @@
+---
+- name: Set system timezone
+  community.general.timezone:
+    name: "{{ system_timezone }}"
+  become: true
+  notify: Restart cron
+
+- name: Verify timezone is set correctly
+  ansible.builtin.command: timedatectl show --property=Timezone --value
+  register: current_timezone
+  changed_when: false
+
+- name: Display current timezone
+  ansible.builtin.debug:
+    msg: "System timezone is set to: {{ current_timezone.stdout }}"

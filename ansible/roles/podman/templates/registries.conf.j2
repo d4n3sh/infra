@@ -1,0 +1,27 @@
+# Container registries configuration for Podman
+# Managed by Ansible - DO NOT EDIT MANUALLY
+
+{% if podman_registries is defined %}
+{% if podman_registries.unqualified_search_registries is defined %}
+unqualified-search-registries = [
+{%   for registry in podman_registries.unqualified_search_registries %}
+  "{{ registry }}"{{ "," if not loop.last else "" }}
+{%   endfor %}
+]
+{% endif %}
+
+{% if podman_registries.registries is defined %}
+{% for registry in podman_registries.registries %}
+
+[[registry]]
+location = "{{ registry.location }}"
+insecure = {{ registry.insecure | default(false) | lower }}
+{% if registry.blocked is defined %}
+blocked = {{ registry.blocked | lower }}
+{% endif %}
+{% if registry.prefix is defined %}
+prefix = "{{ registry.prefix }}"
+{% endif %}
+{% endfor %}
+{% endif %}
+{% endif %}

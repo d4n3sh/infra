@@ -1,0 +1,14 @@
+# code: language=ansible
+---
+- name: Configure System
+  hosts: localhost
+
+  tasks:
+    - name: What is the time
+      ansible.builtin.command: date -Iseconds
+      register: current_time
+      changed_when: current_time != 0
+
+    - name: Print hostname and time
+      ansible.builtin.debug:
+        msg: "Host {{ inventory_hostname }} time: {{ current_time }}"

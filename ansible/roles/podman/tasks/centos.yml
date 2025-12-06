@@ -1,0 +1,47 @@
+---
+# CentOS Podman installation tasks
+# TODO: Implement CentOS specific installation steps
+
+- name: Install Podman on CentOS
+  yum:
+    name: podman
+    state: present
+  become: yes
+  when: ansible_distribution_major_version | int >= 8
+
+- name: Install Podman on CentOS 7 from Kubic repository
+  block:
+    - name: Add Kubic repository for CentOS 7
+      yum_repository:
+        name: kubic
+        description: Kubic repository for Podman
+        baseurl: https://download.opensuse.org/repositories/devel:/kubic:/libcontainers:/stable/CentOS_7/
+        gpgcheck: yes
+        gpgkey: https://download.opensuse.org/repositories/devel:/kubic:/libcontainers:/stable/CentOS_7/repodata/repomd.xml.key
+        enabled: yes
+      become: yes
+
+    - name: Install Podman from Kubic
+      yum:
+        name: podman
+        state: present
+      become: yes
+  when: ansible_distribution_major_version | int == 7
+
+- name: Enable and start Podman socket (if using rootless)
+  systemd:
+    name: "podman.socket"
+    enabled: "{{ podman_enable_socket }}"
+    state: "{{ 'started' if podman_enable_socket else omit }}"
+    scope: user
+  when: podman_enable_socket | default(false)
+  become: no
+
+- name: Configure Podman registries
+  template:
+    src: registries.conf.j2
+    dest: /etc/containers/registries.conf
+    mode: '0644'
+  become: yes
+  when: podman_registries is defined
+  notify: restart podman

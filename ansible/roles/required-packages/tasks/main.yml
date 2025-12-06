@@ -1,0 +1,60 @@
+---
+- name: Find OS-specific variables file
+  ansible.builtin.set_fact:
+    os_vars_file: "{{ lookup('first_found', params, errors='ignore') }}"
+  vars:
+    params:
+      files:
+        - "{{ ansible_distribution }}-{{ ansible_distribution_major_version }}.yml"
+        - "{{ ansible_distribution }}.yml"
+        - "{{ ansible_os_family }}.yml"
+      paths:
+        - "vars"
+
+- name: Include OS-specific variables
+  ansible.builtin.include_vars: "{{ os_vars_file }}"
+  when: os_vars_file | length > 0
+
+- name: Detect if running on QEMU/KVM
+  ansible.builtin.set_fact:
+    is_qemu_vm: >-
+      {{
+        ansible_virtualization_type == 'kvm' or
+        ansible_system_vendor == 'QEMU'
+      }}
+
+- name: Set package list for QEMU VMs
+  ansible.builtin.set_fact:
+    required_packages_final: >-
+      {{
+        required_packages_common +
+        required_packages_os_specific | default([]) +
+        required_packages_extra
+      }}
+  when: is_qemu_vm | bool
+
+- name: Set package list for non-QEMU systems (exclude qemu-guest-agent)
+  ansible.builtin.set_fact:
+    required_packages_final: >-
+      {{
+        (required_packages_common | reject('search', 'qemu-guest-agent') | list) +
+        required_packages_os_specific | default([]) +
+        required_packages_extra
+      }}
+  when: not (is_qemu_vm | bool)
+
+- name: Install required packages on Ubuntu/Debian
+  ansible.builtin.include_tasks: debian.yml
+  when: ansible_os_family == "Debian"
+
+- name: Install required packages on Rocky/RHEL
+  ansible.builtin.include_tasks: redhat.yml
+  when: ansible_os_family == "RedHat"
+
+- name: Enable and start qemu-guest-agent service
+  ansible.builtin.systemd:
+    name: qemu-guest-agent
+    enabled: true
+    state: started
+  become: true
+  when: is_qemu_vm | bool

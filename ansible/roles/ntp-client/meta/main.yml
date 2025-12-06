@@ -1,0 +1,30 @@
+---
+galaxy_info:
+  role_name: ntp_client
+  namespace: homelab
+  author: danny
+  description: Configure systemd-timesyncd NTP client
+  company: Homelab
+  license: MIT
+  min_ansible_version: "2.9"
+  platforms:
+    - name: Ubuntu
+      versions:
+        - focal
+        - jammy
+        - noble
+    - name: Debian
+      versions:
+        - bullseye
+        - bookworm
+    - name: EL
+      versions:
+        - "8"
+        - "9"
+  galaxy_tags:
+    - system
+    - ntp
+    - time
+    - timesyncd
+
+dependencies: []

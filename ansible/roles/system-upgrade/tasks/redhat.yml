@@ -1,0 +1,35 @@
+---
+- name: Ensure dnf-plugins-core is installed
+  ansible.builtin.dnf:
+    name: dnf-plugins-core
+    state: present
+  become: true
+  tags:
+    - never
+    - reboot
+
+- name: Upgrade system packages
+  ansible.builtin.dnf:
+    name: "*"
+    state: latest
+  become: true
+  tags:
+    - never
+    - system_upgrade
+
+- name: Check if reboot is required
+  ansible.builtin.command: dnf needs-restarting -r
+  register: reboot_required_check
+  failed_when: reboot_required_check.rc != 0 and reboot_required_check.rc != 1
+  changed_when: false
+  tags:
+    - never
+    - reboot
+
+- name: Reboot if required
+  ansible.builtin.reboot:
+    msg: "Reboot initiated by Ansible system-upgrade role"
+  when: reboot_required_check.rc == 1
+  tags:
+    - never
+    - reboot

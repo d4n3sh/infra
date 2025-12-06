@@ -1,0 +1,10 @@
+---
+# Default required packages to install across all systems
+required_packages_common:
+  - qemu-guest-agent
+
+# Additional packages that can be added per host/group
+required_packages_extra: []
+
+# Package state (present, latest, absent)
+required_packages_state: present
