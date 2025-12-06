@@ -1,7 +1,2 @@
----
-- name: Set default shell to zsh
-  become: true
-  become_user: "{{ ansible_user_id }}"
-  ansible.builtin.user:
-    name: "{{ ansible_user_id }}"
-    shell: /usr/bin/zsh
+- import_tasks: arch_linux.yml
+  when: ansible_distribution == "Archlinux"

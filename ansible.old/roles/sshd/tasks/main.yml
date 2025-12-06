@@ -1,13 +1,41 @@
 ---
-# tasks file for sshd
-- name: Enable sshd daemon
-  ansible.builtin.systemd:
-    name: sshd
-    enabled: true
-    state: started
+## # tasks file for sshd
+## - name: Enable sshd daemon
+##   become: true
+##   ansible.builtin.systemd:
+##     name: sshd
+##     enabled: true
+##     state: started
+##   when: sshd_daemon_enabled | default(false) | bool
 
-- name: "Install lazygit package"
-  ansible.builtin.dnf:
-    name: lazygit
-    state: present
+## - name: Manage sshd daemon
+##   become: true
+##   ansible.builtin.systemd:
+##     name: sshd
+##     enabled: "{{ sshd_daemon_enabled }}"
+##     state: "{{ 'started' if sshd_daemon_enabled else 'stopped' }}"
+##   when: sshd_daemon_enabled is defined
+
+- name: Manage sshd daemon
+  become: true
+  block:
+    - name: Enable and start sshd daemon
+      ansible.builtin.systemd:
+        name: sshd
+        enabled: true
+        state: started
+      when: sshd_daemon_enabled | default(false) | bool
+
+    - name: Disable and stop sshd daemon
+      ansible.builtin.systemd:
+        name: sshd
+        enabled: false
+        state: stopped
+      when: not (sshd_daemon_enabled | default(false)) | bool
+
+  always:
+    - name: Print sshd daemon status
+      ansible.builtin.debug:
+        msg: "sshd_daemon_enabled is set to {{ sshd_daemon_enabled | default(false) | bool }}. {{ 'Enabling' if (sshd_daemon_enabled | default(false) | bool) else 'Disabling' }} sshd daemon"
+
 ...

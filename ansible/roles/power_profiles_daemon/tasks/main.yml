@@ -1,0 +1,13 @@
+---
+- name: Install power profiles daemon
+  become : true
+  community.general.pacman:
+    name:
+      - power-profiles-daemon
+
+- name: Enable and start power profiles daemon
+  become : true
+  systemd:
+    name: power-profiles-daemon.service
+    enabled: true
+    state: started
