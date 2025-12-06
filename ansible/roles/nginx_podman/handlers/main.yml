@@ -1,0 +1,6 @@
+---
+- name: Restart nginx container
+  containers.podman.podman_container:
+    name: "{{ nginx_podman_container_name }}"
+    state: started
+    restart: true
