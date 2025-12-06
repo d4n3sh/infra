@@ -1,0 +1,13 @@
+---
+# tasks file for sshd
+- name: Enable sshd daemon
+  ansible.builtin.systemd:
+    name: sshd
+    enabled: true
+    state: started
+
+- name: "Install lazygit package"
+  ansible.builtin.dnf:
+    name: lazygit
+    state: present
+...

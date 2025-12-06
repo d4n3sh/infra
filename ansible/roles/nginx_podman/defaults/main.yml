@@ -1,0 +1,10 @@
+---
+nginx_podman_image: docker.io/library/nginx
+nginx_podman_tag: latest
+nginx_podman_container_name: nginx
+nginx_podman_ports:
+  - "8080:80"
+nginx_podman_state: started
+nginx_podman_restart_policy: always
+nginx_podman_volumes: []
+nginx_podman_env: {}

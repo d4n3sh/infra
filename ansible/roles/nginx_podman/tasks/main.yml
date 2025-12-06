@@ -1,0 +1,15 @@
+---
+- name: Pull nginx image
+  containers.podman.podman_image:
+    name: "{{ nginx_podman_image }}"
+    tag: "{{ nginx_podman_tag }}"
+
+- name: Run nginx container
+  containers.podman.podman_container:
+    name: "{{ nginx_podman_container_name }}"
+    image: "{{ nginx_podman_image }}:{{ nginx_podman_tag }}"
+    state: "{{ nginx_podman_state }}"
+    restart_policy: "{{ nginx_podman_restart_policy }}"
+    ports: "{{ nginx_podman_ports }}"
+    volume: "{{ nginx_podman_volumes }}"
+    env: "{{ nginx_podman_env }}"
