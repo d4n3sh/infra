@@ -1,0 +1,14 @@
+# code: language=ansible
+---
+- name: Configure Glass
+  hosts: glass
+  connection: local
+  gather_facts: true
+
+  tasks:
+    # Enable SSH
+    - name: Enable SSH
+      ansible.builtin.service:
+        name: sshd
+        state: started
+        enabled: true
